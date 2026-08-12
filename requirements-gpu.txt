@@ -1,0 +1,6 @@
+# Install AFTER requirements.txt. Pulls torch — verify the lab PC's CUDA
+# driver first with: nvidia-smi
+stable_baselines3==2.8.0
+ultralytics==8.4.50
+open3d==0.19.0
+wandb==0.26.1

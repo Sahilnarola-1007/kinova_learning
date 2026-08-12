@@ -1,0 +1,55 @@
+repositories:
+  kortex:
+    type: git
+    url: https://github.com/Kinovarobotics/Kinova-kortex2_Gen3_G3L.git
+    version: 5bf21ef
+
+  kinova_lowlevel:
+    type: git
+    url: git@github.com:Sahilnarola-1007/kinova-lowlevel.git
+    version: master
+
+  ros2_ws/src/kinova_kinematics:
+    type: git
+    url: git@github.com:Sahilnarola-1007/kinova-kinematics.git
+    version: main
+
+  ros2_ws/src/kinova_wrapper:
+    type: git
+    url: git@github.com:Sahilnarola-1007/kinova-wrapper.git
+    version: master
+
+  ros2_ws/src/admittance_controller:
+    type: git
+    url: git@github.com:Sahilnarola-1007/admittance-controller.git
+    version: master
+
+  ros2_ws/src/kinova_moveit_bridge:
+    type: git
+    url: git@github.com:Sahilnarola-1007/kinova-moveit-bridge.git
+    version: master
+
+  ros2_ws/src/mae_sensor_driver:
+    type: git
+    url: git@github.com:Sahilnarola-1007/mae-sensor-driver.git
+    version: master
+
+  ros2_ws/src/surface_wipe:
+    type: git
+    url: git@github.com:Sahilnarola-1007/surface-wipe.git
+    version: master
+
+  ros2_ws/src/wipe_msgs:
+    type: git
+    url: git@github.com:Sahilnarola-1007/wipe-msgs.git
+    version: master
+
+  ros2_ws/src/kinova_perception:
+    type: git
+    url: git@github.com:Sahilnarola-1007/kinova-perception.git
+    version: main
+
+  ros2_ws/src/ros2_kortex_vision:
+    type: git
+    url: https://github.com/Kinovarobotics/ros2_kortex_vision.git
+    version: ros2

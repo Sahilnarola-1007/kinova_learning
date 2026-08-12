@@ -1,0 +1,20 @@
+# reconstructed by tools/bootstrap.sh — never commit
+venv/
+kortex/
+kinova_lowlevel/
+ros2_ws/src/
+
+# colcon artifacts (absolute paths baked in)
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# cmake / python / editor
+build/
+compile_commands.json
+.cache/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+*.swp

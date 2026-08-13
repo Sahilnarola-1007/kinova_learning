@@ -1,5 +1,5 @@
 # reconstructed by tools/bootstrap.sh — never commit
-venv/
+venv*/
 kortex/
 kinova_lowlevel/
 ros2_ws/src/
@@ -18,3 +18,7 @@ __pycache__/
 .vscode/
 .idea/
 *.swp
+# colcon build trees under any name (build_hw, install_hw, log_hw, ...)
+build*/
+install*/
+log*/

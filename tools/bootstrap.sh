@@ -46,23 +46,22 @@ fi
 echo "    dependency check:"
 ./venv/bin/pip check || echo "    ^^ WARNING: conflicts above — do not ignore"
 
-echo "--- [3/6] F/T sensor venv (numpy 1.x, MAE SDK)"
+echo "--- [3/6] MAE SDK -> user site-packages (~/.local)"
+# Installed for SYSTEM python, not a venv: mae_sensor_node is an rclpy node and
+# `ros2 run` invokes /usr/bin/python3, which searches ~/.local automatically.
+# --break-system-packages is required (PEP 668 marks system python managed).
+#
+# This works because Ubuntu 24.04's apt numpy is 1.26.4, which satisfies
+# mae-sdk's numpy>=1.26.4,<2.0.0. The perception venv stays isolated at
+# numpy 2.x for torch/opencv/scipy. If a future apt upgrade pushes system
+# numpy past 2.0, this breaks and MAE moves to its own venv.
 MAE="$HOME/SensuReal SDKs"
 if [ -d "$MAE/mae-sdk" ] && [ -d "$MAE/mae-fts-sdk" ]; then
-  # --system-site-packages: mae_sensor_node.py is an rclpy node and needs
-  # /opt/ros/jazzy on the path. NOTE: this flag only takes effect at CREATION.
-  # If venv_ft already exists without it, delete and re-run.
-  [ -d venv_ft ] || python3 -m venv venv_ft --system-site-packages
-  touch venv_ft/COLCON_IGNORE
-  ./venv_ft/bin/pip install --upgrade pip
-  # Explicit venv-local numpy so an apt upgrade of python3-numpy past 2.0
-  # cannot break MAE through the system-site-packages path.
-  ./venv_ft/bin/pip install "numpy>=1.26.4,<2.0.0"
-  ./venv_ft/bin/pip install -e "$MAE/mae-sdk"
-  ./venv_ft/bin/pip install -e "$MAE/mae-fts-sdk"
-  echo "    dependency check:"
-  ./venv_ft/bin/pip check || echo "    ^^ WARNING: conflicts above"
-  ./venv_ft/bin/python -c "import numpy; print('    numpy in use:', numpy.__version__, numpy.__file__)"
+  /usr/bin/python3 -m pip install --user --break-system-packages \
+    "$MAE/mae-sdk" "$MAE/mae-fts-sdk"
+  /usr/bin/python3 -c "import numpy, mae_sdk, mae_fts_sdk; \
+    print('    system numpy:', numpy.__version__); \
+    assert numpy.__version__ < '2', 'system numpy >= 2.0 — MAE needs < 2.0'"
 else
   echo "    MISSING: '$MAE'"
   echo "    Copy it from the other machine. F/T sensor will not work without it."
